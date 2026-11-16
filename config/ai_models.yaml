@@ -1,0 +1,80 @@
+# AI Model Configuration
+
+models:
+  # Primary analysis model - best for complex reasoning
+  primary:
+    name: "llama3.1:70b"
+    provider: "ollama"
+    purpose: ["analysis", "poc_generation", "report_writing", "chain_reasoning"]
+    max_tokens: 8192
+    temperature: 0.1
+    top_p: 0.9
+    context_window: 128000
+    system_prompt: |
+      You are an expert bug bounty hunter and security researcher.
+      Analyze vulnerabilities, generate POCs, and write professional reports.
+      Be precise, technical, and thorough. No fluff.
+
+  # Code analysis and exploit development
+  code:
+    name: "deepseek-coder:33b"
+    provider: "ollama"
+    purpose: ["code_review", "exploit_dev", "poc_code", "payload_generation"]
+    max_tokens: 8192
+    temperature: 0.0
+    top_p: 0.95
+    context_window: 128000
+    system_prompt: |
+      You are an expert in vulnerability exploitation and secure coding.
+      Generate working exploit code, analyze vulnerable patterns,
+      and create proof-of-concept exploits.
+
+  # Complex chain reasoning
+  reasoning:
+    name: "nemotron3-ultra"
+    provider: "ollama"
+    purpose: ["vuln_chaining", "impact_assessment", "bypass_strategy"]
+    max_tokens: 8192
+    temperature: 0.2
+    top_p: 0.9
+    context_window: 128000
+    system_prompt: |
+      You are a senior penetration tester specializing in vulnerability chaining
+      and complex attack paths. Think step-by-step. Consider all possibilities.
+
+  # Fast triage and classification
+  fast:
+    name: "phi3:14b"
+    provider: "ollama"
+    purpose: ["triage", "classification", "deduplication", "quick_analysis"]
+    max_tokens: 4096
+    temperature: 0.0
+    top_p: 0.9
+    context_window: 128000
+    system_prompt: |
+      Quickly classify and triage security findings.
+      Identify false positives, assess severity, deduplicate.
+      Be decisive and concise.
+
+  # Lightweight for simple tasks
+  lightweight:
+    name: "phi3:3.8b"
+    provider: "ollama"
+    purpose: ["summarization", "formatting", "extraction"]
+    max_tokens: 2048
+    temperature: 0.0
+    top_p: 0.9
+    context_window: 4096
+
+# Cloud fallback models (optional - require API keys)
+cloud_models:
+  enabled: false
+  anthropic:
+    model: "claude-3-5-sonnet-20241022"
+    api_key_env: "ANTHROPIC_API_KEY"
+  openai:
+    model: "gpt-4o"
+    api_key_env: "OPENAI_API_KEY"
+  google:
+    model: "gemini-1.5-pro"
+    api_key_env: "GOOGLE_API_KEY"

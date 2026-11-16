@@ -1,0 +1,39 @@
+# Custom prompt templates for AI hunting
+# Add your custom prompts here
+
+custom_prompts:
+  - name: "custom_xss_detection"
+    description: "Custom XSS detection for specific frameworks"
+    template: |
+      Analyze this endpoint for XSS vulnerabilities in a {{framework}} application:
+      URL: {{url}}
+      Method: {{method}}
+      Parameters: {{parameters}}
+      Technology: {{technology}}
+
+      Focus on {{framework}}-specific XSS vectors:
+      - Template injection
+      - Component prop injection
+      - Event handler manipulation
+
+      Output as JSON array with: vuln_type, severity, title, description, parameter, payload, reasoning, confidence
+
+  - name: "custom_api_testing"
+    description: "Custom API security testing"
+    template: |
+      Analyze this API endpoint for security vulnerabilities:
+      Endpoint: {{url}}
+      Method: {{method}}
+      Headers: {{headers}}
+      Body Schema: {{schema}}
+      Auth: {{auth_type}}
+
+      Test for:
+      - BOLA/IDOR
+      - Mass assignment
+      - Injection (SQL, NoSQL, LDAP)
+      - Authentication bypass
+      - Rate limiting
+      - Information disclosure
+
+      Output as JSON array with: vuln_type, severity, title, description, parameter, payload, reasoning, confidence

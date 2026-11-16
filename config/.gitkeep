@@ -1,0 +1,10 @@
+# This file ensures the config directory is tracked by git
+# Config files are in:
+# - programs.yaml.example (copy to programs.yaml)
+# - hunting.yaml
+# - validation.yaml
+# - ai_models.yaml
+# - .env.example (copy to .env)
+# - scopes/example.yaml (copy for each program)
+# - policies/example.yaml (copy for each program)
+# - prompts/example_prompt.yaml (custom AI prompts)

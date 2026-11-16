@@ -1,0 +1,74 @@
+# Validation Configuration
+
+validation:
+  # Browser reproduction (Playwright + Firefox)
+  browser:
+    enabled: true
+    headless: false                # MUST be false for real evidence
+    browser: "firefox"             # firefox, chromium, webkit
+    viewport:
+      width: 1920
+      height: 1080
+    record_video: true
+    video_dir: "evidence/videos"
+    screenshot_on_success: true
+    screenshot_on_failure: true
+    screenshot_dir: "evidence/screenshots"
+    har_capture: true
+    har_dir: "evidence/har"
+    console_logs: true
+    network_logs: true
+    timeout: 60000                 # 60 seconds
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    # Stealth settings
+    stealth:
+      disable_automation_flags: true
+      disable_web_security: true
+      ignore_https_errors: true
+
+  # Burp Suite integration
+  burp:
+    enabled: true
+    api_url: "http://127.0.0.1:1337"  # Burp REST API (Pro only)
+    proxy_port: 8080
+    proxy_host: "127.0.0.1"
+    capture_traffic: true
+    export_format: "json"           # json, xml, html
+    export_dir: "evidence/burp"
+    # For Community Edition: use mitmproxy instead
+    use_mitmproxy_fallback: true
+    mitmproxy_port: 8081
+
+  # Terminal capture
+  terminal:
+    enabled: true
+    tool: "asciinema"              # asciinema, script
+    output_dir: "evidence/terminal"
+    record_all_sessions: true
+
+  # AI validation
+  ai_validation:
+    enabled: true
+    model: "llama3.1:70b"
+    confidence_threshold: 0.8      # Minimum confidence to auto-validate
+    false_positive_checks:
+      - "reflection_analysis"
+      - "payload_execution"
+      - "impact_verification"
+      - "duplicate_detection"
+
+  # Evidence packaging
+  evidence:
+    create_package: true
+    package_dir: "evidence/packages"
+    include:
+      - screenshots
+      - videos
+      - har_files
+      - burp_exports
+      - terminal_recordings
+      - annotated_screenshots
+      - poc_code
+    annotate_screenshots: true
+    annotation_color: "red"
+    annotation_width: 3

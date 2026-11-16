@@ -1,0 +1,34 @@
+# Scope configuration for example-program
+# Edit this file to define in-scope and out-of-scope targets
+
+in_scope:
+  - pattern: "*.example.com"
+    description: "All subdomains of example.com"
+  - pattern: "api.example.com"
+    description: "API endpoint"
+  - pattern: "app.example.com"
+    description: "Main application"
+  - pattern: "admin.example.com"
+    description: "Admin panel"
+  - pattern: "192.168.1.0/24"
+    description: "Internal network range (if authorized)"
+  - pattern: "10.0.0.0/8"
+    description: "Private network range (if authorized)"
+
+out_of_scope:
+  - pattern: "blog.example.com"
+    description: "Blog subdomain"
+  - pattern: "cdn.example.com"
+    description: "CDN subdomain"
+  - pattern: "static.example.com"
+    description: "Static assets"
+  - pattern: "mail.example.com"
+    description: "Email server"
+  - pattern: "192.168.100.0/24"
+    description: "Management network"
+  - pattern: "*.test.example.com"
+    description: "Test environments"
+  - pattern: "*.dev.example.com"
+    description: "Development environments"
+  - pattern: "*.staging.example.com"
+    description: "Staging environments"

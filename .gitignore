@@ -1,0 +1,63 @@
+# Dependencies
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Database
+*.db
+*.sqlite
+
+# Evidence files
+evidence/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.webm
+*.har
+*.cast
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large files
+*.zip
+*.tar.gz
+*.bak
+
+# Payloads (already in repo from PayloadsAllTheThings)
+# payloads/
+
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.temp
+*.lock
+
+# Backup files
+backups/
+*.db.backup

@@ -1,0 +1,94 @@
+# Hunting Configuration
+
+hunting:
+  # General settings
+  threads: 50                      # Concurrent threads
+  timeout: 30                      # Request timeout (seconds)
+  retries: 3                       # Retry failed requests
+  follow_redirects: true
+  verify_ssl: false                # Set true for production
+
+  # Rate limiting (per target)
+  rate_limit:
+    requests_per_second: 10
+    burst: 20
+
+  # Scope enforcement
+  strict_scope: true               # Hard block out-of-scope
+  allow_subdomains: true           # Allow subdomain enumeration
+
+  # Scanner settings
+  scanners:
+    nuclei:
+      enabled: true
+      severity: ["critical", "high", "medium", "low"]  # P1-P4
+      tags: []                     # Filter by tags (e.g., ["cve", "rce"])
+      exclude_tags: ["info", "dos", "fuzzing"]
+      rate_limit: 150              # Nuclei rate limit
+      templates_path: "~/nuclei-templates-custom"
+      custom_templates: true
+
+    dalfox:
+      enabled: true
+      blind_xss: true
+      mining: true
+      worker: 50
+
+    sqlmap:
+      enabled: true
+      level: 3
+      risk: 2
+      batch: true
+      threads: 10
+
+    custom_payloads:
+      enabled: true
+      payload_dir: "payloads"
+
+  # AI hunting settings
+  ai_hunting:
+    enabled: true
+    models:
+      primary: "llama3.1:70b"
+      code: "deepseek-coder:33b"
+      reasoning: "nemotron3-ultra"
+      fast: "phi3:14b"
+    max_tokens: 8192
+    temperature: 0.1
+    context_window: 128000
+
+    # Prompt templates
+    prompts_dir: "skills/hunting/prompts"
+
+  # Specialized hunters (enable/disable)
+  specialized:
+    xss: true
+    sqli: true
+    ssrf: true
+    rce: true
+    auth: true
+    logic: true
+    api: true
+    mobile: false
+    cloud: true
+    supply_chain: false
+
+  # Payload settings
+  payloads:
+    xss:
+      - "payloads/xss/reflected.txt"
+      - "payloads/xss/stored.txt"
+      - "payloads/xss/dom.txt"
+      - "payloads/xss/blind.txt"
+    sqli:
+      - "payloads/sqli/error.txt"
+      - "payloads/sqli/blind.txt"
+      - "payloads/sqli/time.txt"
+    ssrf:
+      - "payloads/ssrf/basic.txt"
+      - "payloads/ssrf/cloud.txt"
+      - "payloads/ssrf/bypass.txt"
+    rce:
+      - "payloads/rce/deserialization.txt"
+      - "payloads/rce/template.txt"
+      - "payloads/rce/command.txt"

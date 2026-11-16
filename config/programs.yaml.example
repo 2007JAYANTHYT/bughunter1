@@ -1,0 +1,48 @@
+# Bug Bounty Program Configurations
+# Copy to programs.yaml and fill in your details
+
+programs:
+  - name: "example-program"
+    platform: "hackerone"  # hackerone, bugcrowd, intigriti, yeswehack, custom
+    handle: "example"      # Program handle on platform
+    enabled: true
+
+    # Authentication
+    auth:
+      type: "api_token"    # api_token, cookie, header, none
+      env_var: "H1_TOKEN"  # Environment variable name for token
+      # Or inline (NOT recommended for production):
+      # token: "your_token_here"
+
+    # Scope configuration
+    scope:
+      file: "scopes/example.yaml"  # Path to scope file
+      auto_fetch: true             # Auto-fetch from platform API
+
+    # Policy configuration
+    policy:
+      file: "policies/example.yaml"
+      max_severity: "P1"           # P1, P2, P3, P4 (ignore P5+)
+      banned_types:                # Vulnerability types to skip
+        - "self-xss"
+        - "clickjacking"
+        - "missing-security-headers"
+      rate_limit: 100              # Requests per minute
+      require_poc: true            # Require POC for submission
+      poc_format: "video"          # video, screenshots, curl, har
+
+    # Custom headers for all requests
+    custom_headers:
+      - "X-Bug-Bounty: true"
+      - "User-Agent: BugHunter/1.0"
+
+    # Notification settings
+    notifications:
+      webhook: ""                  # Discord/Slack webhook
+      email: ""                    # Email for critical findings
+
+  # Add more programs here...
+  # - name: "another-program"
+  #   platform: "bugcrowd"
+  #   handle: "another"
+  #   ...

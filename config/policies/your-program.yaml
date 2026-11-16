@@ -1,0 +1,39 @@
+# Policy configuration for example-program
+# Add program-specific rules here
+
+# Additional banned vulnerability types (added to global banned_types)
+banned_vuln_types:
+  - "rate-limiting-bypass"
+  - "weak-password-policy"
+  - "missing-http-security-headers"
+  - "cookie-flags-missing"
+  - "information-disclosure-version"
+
+# Special rules for this program
+special_rules:
+  - "No testing on weekends without prior approval"
+  - "Maximum 1000 requests per hour per IP"
+  - "No automated scanning on payment endpoints"
+  - "No testing on production database endpoints"
+  - "All PII exposure must be reported immediately"
+
+# Custom severity overrides
+severity_overrides:
+  - vuln_type: "idor"
+    severity: "P1"  # Override default P2 for this program
+  - vuln_type: "ssrf"
+    severity: "P1"  # SSRF is critical for cloud infrastructure
+
+# POC requirements
+poc_requirements:
+  video_required: true
+  screenshots_required: true
+  curl_command_required: true
+  har_file_required: true
+
+# Reporting preferences
+reporting:
+  format: "markdown"  # markdown, html, pdf
+  include_evidence: true
+  include_poc_code: true
+  anonymize_customer_data: true
